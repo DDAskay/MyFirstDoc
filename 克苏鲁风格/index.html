@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>克苏鲁式取名器</title>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #0a0a0f;
+            color: #00ff00;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(28, 54, 69, 0.2) 0%, transparent 100%),
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23015' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .container {
+            background-color: rgba(13, 17, 23, 0.95);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+            border: 1px solid rgba(0, 255, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-conic-gradient(from 0deg, rgba(0, 255, 0, 0.1) 0deg 10deg, transparent 10deg 20deg);
+            animation: rotate 20s linear infinite;
+            z-index: -1;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        h1 {
+            font-family: 'Creepster', cursive;
+            color: #00ff00;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+            letter-spacing: 2px;
+        }
+        .input-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            justify-content: center;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .input-group input, .input-group select, .input-group button {
+            background: rgba(0, 34, 0, 0.7);
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            color: #00ff00;
+            padding: 10px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus, .input-group select:focus {
+            outline: none;
+            border-color: #00ff00;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+            transform: translateZ(10px);
+        }
+
+        .input-group button {
+            background: rgba(0, 68, 0, 0.8);
+            cursor: pointer;
+            font-family: 'Creepster', cursive;
+            font-size: 1.2em;
+            text-shadow: 0 0 5px #00ff00;
+        }
+
+        .input-group button:hover {
+            background: rgba(0, 102, 0, 0.9);
+            transform: translateZ(5px) scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.4);
+        }
+        .select-wrapper {
+            position: relative;
+            width: 120px;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            background-color: rgba(0, 40, 0, 0.9);
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            color: #00ff00;
+            border-radius: 5px;
+            appearance: none;
+            cursor: pointer;
+        }
+        select:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        }
+        input[type="text"] {
+            padding: 10px 15px;
+            font-size: 16px;
+            width: 300px;
+            background-color: rgba(0, 40, 0, 0.9);
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            border-radius: 5px;
+            color: #00ff00;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+        input[type="text"]:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+            border-color: rgba(0, 255, 0, 0.6);
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: rgba(0, 40, 0, 0.9);
+            color: #00ff00;
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+        }
+        button:hover {
+            background-color: rgba(0, 60, 0, 0.9);
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+        }
+        button:disabled {
+            background-color: rgba(20, 20, 20, 0.9);
+            color: rgba(0, 255, 0, 0.3);
+            cursor: not-allowed;
+            border-color: rgba(0, 255, 0, 0.1);
+        }
+        .results {
+            margin-top: 30px;
+        }
+        .name-card {
+            background-color: rgba(0, 40, 0, 0.3);
+            border: 1px solid rgba(0, 255, 0, 0.2);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            animation: glowPulse 2s infinite;
+        }
+        @keyframes glowPulse {
+            0% { box-shadow: 0 0 5px rgba(0, 255, 0, 0.2); }
+            50% { box-shadow: 0 0 15px rgba(0, 255, 0, 0.4); }
+            100% { box-shadow: 0 0 5px rgba(0, 255, 0, 0.2); }
+        }
+        .name-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+        }
+        .chinese-name {
+            font-size: 24px;
+            color: #00ff00;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        }
+        .meaning {
+            color: rgba(0, 255, 0, 0.8);
+            line-height: 1.6;
+        }
+        .loading {
+            text-align: center;
+            display: none;
+        }
+        .loading:after {
+            content: '.';
+            animation: dots 1.5s steps(5, end) infinite;
+        }
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60% { content: '...'; }
+            80% { content: '....'; }
+            100% { content: '.....'; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Chinese Name Generator</h1>
+        <div class="input-section">
+            <div class="input-group">
+                <div class="select-wrapper">
+                    <select id="generation" name="generation">
+                        <option value="60">60后</option>
+                        <option value="70">70后</option>
+                        <option value="80">80后</option>
+                        <option value="90">90后</option>
+                        <option value="00">00后</option>
+                    </select>
+                </div>
+                <div class="select-wrapper">
+                    <select id="gender" name="gender">
+                        <option value="male">男</option>
+                        <option value="female">女</option>
+                    </select>
+                </div>
+            </div>
+            <div class="input-group">
+                <input type="text" id="englishName" placeholder="输入你的英文名" />
+                <button onclick="generateNames()" id="generateBtn">生成克苏鲁式名字</button>
+            </div>
+        </div>
+        <div id="loading" class="loading">Generating your Chinese names</div>
+        <div id="results" class="results"></div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
