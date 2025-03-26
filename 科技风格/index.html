@@ -356,8 +356,9 @@
     </div>
 
     <script>
-        const API_KEY = '9d9e5dc4-91bb-49b0-aa25-8c651314f9a4';
-        const MODEL = 'deepseek-r1-250120';
+        // 从环境变量中获取API配置
+        const API_KEY = process.env.VOLCES_API_KEY;
+        const MODEL = process.env.VOLCES_MODEL || 'deepseek-r1-250120';
 
         // 统一的错误处理函数
         function showError(message) {
@@ -412,7 +413,8 @@ English Meaning：[English explanation of the name's meaning and cultural backgr
                 const controller = new AbortController();
                 const timeoutId = setTimeout(() => controller.abort(), 60000); // 60秒超时
 
-                const response = await fetch('https://ark.cn-beijing.volces.com/api/v3/chat/completions', {
+                const API_URL = process.env.VOLCES_API_URL || 'https://ark.cn-beijing.volces.com/api/v3/chat/completions';
+                const response = await fetch(API_URL, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

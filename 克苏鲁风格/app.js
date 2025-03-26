@@ -1,6 +1,7 @@
-// 火山引擎API配置
-const API_KEY = '9d9e5dc4-91bb-49b0-aa25-8c651314f9a4';
-const API_URL = 'https://ark.cn-beijing.volces.com/api/v3/chat/completions';
+// 从环境变量中获取API配置
+const config = require('../config');
+const API_KEY = config.apiKey;
+const API_URL = config.apiUrl;
 
 // DOM元素
 const englishNameInput = document.getElementById('englishName');
@@ -51,7 +52,7 @@ async function generateNames() {
                 'Authorization': `Bearer ${API_KEY}`
             },
             body: JSON.stringify({
-                model: 'deepseek-r1-250120',
+                model: config.model,
                 messages: [
                     { role: 'system', content: SYSTEM_PROMPT },
                     { role: 'user', content: `My English name is ${englishName}. I was born in 19${generation}s and my gender is ${gender}. Please help me generate Cthulhu-style Chinese names.` }
